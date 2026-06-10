@@ -1,0 +1,12 @@
+.not-found-container{
+  min-height:80vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.error-code{
+  font-size:6rem;
+  font-weight:bold;
+  color:#dc3545;
+}

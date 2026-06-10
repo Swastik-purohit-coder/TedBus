@@ -1,0 +1,71 @@
+<div class="container mt-5">
+
+  <div class="alert alert-info mb-4" *ngIf="bus">
+
+    <h5>{{ bus.busName }}</h5>
+
+    <p>
+      {{ bus.source }} → {{ bus.destination }}
+    </p>
+
+    <p>
+      Fare: ₹{{ bus.fare }}
+    </p>
+
+  </div>
+
+  <h2 class="mb-4">
+    Select Seats
+  </h2>
+
+  <div class="row">
+
+    <div
+      *ngFor="let seat of seats"
+      class="col-3 col-md-2 mb-3">
+
+      <button
+        class="btn w-100"
+        [class.btn-danger]="seat.booked"
+        [class.btn-primary]="seat.selected"
+        [class.btn-success]="!seat.booked && !seat.selected"
+        (click)="selectSeat(seat)">
+
+        {{ seat.seatNumber }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="card mt-4 p-3 shadow">
+
+    <h5>
+      Selected Seats
+    </h5>
+
+    <p>
+
+      <span
+        *ngFor="let seat of getSelectedSeats()"
+        class="badge bg-primary me-2">
+
+        {{ seat.seatNumber }}
+
+      </span>
+
+    </p>
+
+  <button
+  routerLink="/booking"
+  class="btn btn-danger"
+  (click)="continueBooking()">
+
+  Continue Booking
+
+</button>
+
+  </div>
+
+</div>

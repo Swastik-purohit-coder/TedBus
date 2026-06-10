@@ -1,0 +1,72 @@
+<div class="container mt-5">
+
+  <h2 class="mb-4">
+    My Bookings
+  </h2>
+
+  <div
+    *ngIf="bookings.length === 0"
+    class="alert alert-info">
+
+    No bookings found.
+
+  </div>
+
+  <div
+    *ngFor="let booking of bookings"
+    class="card shadow-sm mb-3">
+
+    <div class="card-body">
+
+      <h5>
+        {{ booking.bus.busName }}
+      </h5>
+
+      <p>
+        {{ booking.bus.source }}
+        →
+        {{ booking.bus.destination }}
+      </p>
+
+      <p>
+        Seats:
+        {{ booking.seats.join(', ') }}
+      </p>
+
+      <p>
+        Passenger:
+        {{ booking.passengerName }}
+      </p>
+
+      <p>
+        Phone:
+        {{ booking.phone }}
+      </p>
+
+      <p>
+        Payment:
+        {{ booking.paymentStatus }}
+      </p>
+
+      <p>
+        Date:
+        {{ booking.createdAt | date:'medium' }}
+      </p>
+
+      <p class="fw-bold text-success">
+        ₹{{ booking.amount }}
+      </p>
+
+      <button
+        class="btn btn-outline-danger"
+        (click)="cancelBooking(booking._id)">
+
+        Cancel Booking
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

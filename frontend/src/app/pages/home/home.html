@@ -1,0 +1,52 @@
+<div class="bg-danger text-white py-5">
+
+  <div class="container">
+
+    <h1 class="text-center fw-bold mb-5">
+      India's No.1 Bus Booking Platform
+    </h1>
+
+    <div class="card shadow p-4">
+
+      <div class="row g-3">
+
+        <div class="col-12 col-md-4">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="From"
+            [(ngModel)]="source">
+        </div>
+
+        <div class="col-12 col-md-4">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="To"
+            [(ngModel)]="destination">
+        </div>
+
+        <div class="col-12 col-md-2">
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="journeyDate">
+        </div>
+
+        <div class="col-12 col-md-2">
+          <button
+            class="btn btn-danger w-100"
+            (click)="searchBuses()">
+
+            Search
+
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

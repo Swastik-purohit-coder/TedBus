@@ -1,0 +1,12 @@
+.loader-wrapper{
+  height:300px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.loader-spinner{
+  width:4rem;
+  height:4rem;
+}
