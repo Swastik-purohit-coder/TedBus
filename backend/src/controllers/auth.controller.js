@@ -50,7 +50,7 @@ const googleSuccess = async (req, res) => {
     generateToken(req.user._id);
 
   res.redirect(
-    `http://localhost:4200/login-success?token=${token}`
+    `https://ted-bus-git-main-swastik-kumar-purohits-projects.vercel.app/login-success?token=${token}`
   );
 
 };
