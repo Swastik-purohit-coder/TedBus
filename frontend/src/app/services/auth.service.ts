@@ -1,25 +1,40 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  getToken() {
+  private authUrl =
+    `${environment.apiUrl}/auth`;
+
+  constructor() {}
+
+  getToken(): string | null {
 
     return localStorage.getItem('token');
 
   }
 
-  isLoggedIn() {
+  isLoggedIn(): boolean {
 
     return !!localStorage.getItem('token');
 
   }
 
-  logout() {
+  loginWithGoogle(): void {
+
+    window.location.href =
+      `${this.authUrl}/google`;
+
+  }
+
+  logout(): void {
 
     localStorage.removeItem('token');
+
+    localStorage.removeItem('user');
 
   }
 

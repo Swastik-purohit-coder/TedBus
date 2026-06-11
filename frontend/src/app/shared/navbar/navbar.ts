@@ -26,7 +26,7 @@ export class NavbarComponent {
   login() {
 
     window.location.href =
-      'http://localhost:5000/api/auth/google';
+      'https://tedbus-backend-y1q4.onrender.com/api/auth/google';
 
   }
 

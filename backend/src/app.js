@@ -22,7 +22,7 @@ MIDDLEWARE
 
 app.use(
   cors({
-    origin: 'http://localhost:4200',
+    origin: true,
     credentials: true
   })
 );

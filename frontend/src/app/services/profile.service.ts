@@ -4,13 +4,15 @@ import {
   HttpHeaders
 } from '@angular/common/http';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
   private apiUrl =
-    'http://localhost:5000/api/profile';
+    `${environment.apiUrl}/profile`
 
   constructor(
     private http: HttpClient
