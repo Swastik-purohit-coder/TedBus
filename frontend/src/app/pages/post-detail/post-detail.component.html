@@ -1,0 +1,184 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <!-- Back Link -->
+      <a routerLink="/community" class="btn btn-outline-secondary mb-4">
+        &larr; Back to Community
+      </a>
+
+      <!-- Loading State -->
+      @if (loadingPost) {
+        <div class="text-center py-5">
+          <div class="spinner-border text-danger"></div>
+          <p class="mt-2 text-muted">Loading post details...</p>
+        </div>
+      }
+
+      <!-- Post Found -->
+      @if (!loadingPost && post) {
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body p-4">
+
+            <!-- Author Header -->
+            <div class="d-flex align-items-center mb-3">
+              @if (post.user?.picture) {
+                <img
+                  [src]="post.user?.picture"
+                  width="50"
+                  height="50"
+                  class="rounded-circle me-3"
+                  alt="User Avatar"
+                  (error)="onImageError($event)"
+                />
+              }
+              <div>
+                <h5 class="mb-0 fw-bold">
+                  {{ post.user?.name || 'Anonymous Traveler' }}
+                </h5>
+                <small class="text-muted">
+                  Published on {{ post.createdAt | date:'mediumDate' }}
+                </small>
+              </div>
+            </div>
+
+            <!-- Post Title & Content -->
+            <h2 class="fw-bold mb-3">{{ post.title }}</h2>
+            <p class="fs-5 text-secondary style-content mb-4">
+              {{ post.content }}
+            </p>
+
+            <!-- Image preview -->
+            @if (post.imageUrl) {
+              <div class="mb-4">
+                <img
+                  [src]="post.imageUrl"
+                  class="img-fluid rounded-3 w-100 shadow-sm"
+                  alt="Travel post photo"
+                  (error)="onImageError($event)"
+                />
+              </div>
+            }
+
+            <!-- Like & Share Bar -->
+            <div class="d-flex gap-3 pt-3 border-top">
+              <button
+                class="btn btn-outline-danger"
+                (click)="likePost()"
+              >
+                ❤️ {{ post.likes.length }} {{ post.likes.length === 1 ? 'Like' : 'Likes' }}
+              </button>
+
+              <button
+                class="btn btn-outline-secondary"
+                disabled
+              >
+                💬 {{ post.commentsCount }} Comments
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <h4 class="fw-bold mb-4">Comments ({{ comments.length }})</h4>
+
+            <!-- Add Comment Form -->
+            @if (authService.isLoggedIn()) {
+              <div class="mb-4">
+                <textarea
+                  class="form-control mb-2"
+                  rows="3"
+                  placeholder="Write a comment..."
+                  [(ngModel)]="newCommentText"
+                ></textarea>
+
+                <button
+                  class="btn btn-primary"
+                  [disabled]="submittingComment || !newCommentText.trim()"
+                  (click)="submitComment()"
+                >
+                  {{ submittingComment ? 'Posting...' : 'Post Comment' }}
+                </button>
+              </div>
+            } @else {
+              <div class="alert alert-info mb-4">
+                Please log in to join the conversation and write a comment.
+              </div>
+            }
+
+            <!-- Comments List -->
+            @if (loadingComments) {
+              <div class="text-center py-3">
+                <div class="spinner-border spinner-border-sm text-secondary"></div>
+              </div>
+            }
+
+            @if (!loadingComments && comments.length === 0) {
+              <p class="text-muted text-center py-3">
+                No comments yet. Be the first to share your thoughts!
+              </p>
+            }
+
+            <div class="d-flex flex-column gap-3">
+              @for (comment of comments; track comment._id) {
+                <div class="p-3 rounded-3 bg-light border-0">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div class="d-flex align-items-center">
+                      @if (comment.user?.picture) {
+                        <img
+                          [src]="comment.user?.picture"
+                          width="32"
+                          height="32"
+                          class="rounded-circle me-2"
+                          alt="Commenter"
+                          (error)="onImageError($event)"
+                        />
+                      }
+                      <div>
+                        <strong class="d-block me-2 fs-6">
+                          {{ comment.user?.name || 'Traveler' }}
+                        </strong>
+                        <small class="text-muted">
+                          {{ comment.createdAt | date:'short' }}
+                        </small>
+                      </div>
+                    </div>
+
+                    <button
+                      class="btn btn-sm text-danger p-0"
+                      (click)="deleteComment(comment._id)"
+                      title="Delete Comment"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+
+                  <p class="mb-0 text-dark ms-1">
+                    {{ comment.text }}
+                  </p>
+                </div>
+              }
+            </div>
+
+          </div>
+        </div>
+
+      }
+
+      <!-- Not Found State -->
+      @if (!loadingPost && !post) {
+        <div class="text-center py-5 card border-0 shadow-sm">
+          <div class="card-body p-5">
+            <h3>Post Not Found</h3>
+            <p class="text-muted">The travel post you are looking for does not exist or has been removed.</p>
+            <a routerLink="/community" class="btn btn-danger mt-3">Return to Community</a>
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+</div>

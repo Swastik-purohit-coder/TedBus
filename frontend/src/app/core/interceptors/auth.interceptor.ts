@@ -1,6 +1,8 @@
 import {
-  HttpInterceptorFn
+  HttpInterceptorFn,
+  HttpErrorResponse
 } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (
   req,
@@ -25,6 +27,14 @@ export const authInterceptor: HttpInterceptorFn = (
 
   }
 
-  return next(req);
+  return next(req).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      }
+      return throwError(() => error);
+    })
+  );
 
 };

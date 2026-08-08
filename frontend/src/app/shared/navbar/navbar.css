@@ -1,0 +1,13 @@
+.nav-link {
+  transition: opacity 0.2s ease, font-weight 0.2s ease;
+  font-size: 1.05rem;
+}
+
+.nav-link:hover {
+  opacity: 0.85;
+}
+
+.nav-link.active {
+  font-weight: 700;
+  border-bottom: 2px solid #ffffff;
+}

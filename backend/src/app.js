@@ -9,6 +9,10 @@ const protectedRoutes = require('./routes/protected.route');
 const busRoutes = require('./routes/bus.route');
 const bookingRoutes = require('./routes/booking.route');
 const profileRoutes = require('./routes/profile.route');
+const postRoutes = require("./routes/post.route");
+const commentRoutes = require("./routes/comment.route");
+const forumRoutes = require("./routes/forum.route");
+const reportRoutes = require("./routes/report.route");
 
 require('./config/passport');
 
@@ -58,6 +62,14 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/buses', busRoutes);
 
 app.use('/api/bookings', bookingRoutes);
+
+app.use("/api/community/posts", postRoutes);
+
+app.use("/api/community/comments", commentRoutes);
+
+app.use("/api/community/forums", forumRoutes);
+
+app.use("/api/community/reports", reportRoutes);
 
 /*
 ========================================

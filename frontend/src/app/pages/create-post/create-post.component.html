@@ -1,0 +1,104 @@
+<div class="container py-5">
+
+  <div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+      <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
+
+          <h2 class="fw-bold mb-1">
+            Share Your Journey
+          </h2>
+
+          <p class="text-muted mb-4">
+            Share your bus journey, travel tips or experience.
+          </p>
+
+          <form
+            [formGroup]="postForm"
+            (ngSubmit)="submitPost()"
+          >
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Title
+              </label>
+
+              <input
+                type="text"
+                class="form-control"
+                formControlName="title"
+                placeholder="Example: My Bhubaneswar to Kolkata Journey"
+              />
+
+            </div>
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Your Story
+              </label>
+
+              <textarea
+                class="form-control"
+                rows="7"
+                formControlName="content"
+                placeholder="Share your travel experience..."
+              ></textarea>
+
+            </div>
+
+            <div class="mb-4">
+
+              <label class="form-label">
+                Direct Image URL (Optional)
+              </label>
+
+              <input
+                type="url"
+                class="form-control"
+                formControlName="imageUrl"
+                placeholder="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957"
+              />
+
+              <small class="text-muted d-block mt-1">
+                Must be a direct image URL (ending in .jpg, .png, .webp or Unsplash/Imgur image link).
+              </small>
+
+              @if (postForm.value.imageUrl) {
+                <div class="mt-3 p-2 bg-light rounded border text-center">
+                  <small class="d-block text-muted mb-2">Image Preview:</small>
+                  <img
+                    [src]="postForm.value.imageUrl"
+                    class="img-fluid rounded"
+                    style="max-height: 200px; object-fit: cover;"
+                    alt="Preview"
+                    (error)="$any($event.target).style.display='none'"
+                  />
+                </div>
+              }
+
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary w-100"
+              [disabled]="submitting"
+            >
+              {{ submitting ? 'Publishing...' : 'Publish Post' }}
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

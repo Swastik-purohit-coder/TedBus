@@ -49,8 +49,10 @@ const googleSuccess = async (req, res) => {
   const token =
     generateToken(req.user._id);
 
+  const clientUrl = process.env.CLIENT_URL || 'http://localhost:4200';
+
   res.redirect(
-    `https://ted-bus-git-main-swastik-kumar-purohits-projects.vercel.app/login-success?token=${token}`
+    `${clientUrl}/login-success?token=${token}`
   );
 
 };

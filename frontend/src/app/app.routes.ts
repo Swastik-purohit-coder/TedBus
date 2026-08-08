@@ -60,6 +60,27 @@ export const routes: Routes = [
     component: LoginSuccessComponent,
     
   },
+  {
+  path: 'community',
+  loadComponent: () =>
+    import('./pages/community/community.component')
+      .then(m => m.CommunityComponent)
+},
+
+{
+  path: 'community/create',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('./pages/create-post/create-post.component')
+      .then(m => m.CreatePostComponent)
+},
+
+{
+  path: 'community/post/:id',
+  loadComponent: () =>
+    import('./pages/post-detail/post-detail.component')
+      .then(m => m.PostDetailComponent)
+},
 
   {
     path: '**',

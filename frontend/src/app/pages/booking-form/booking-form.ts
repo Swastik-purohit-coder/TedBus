@@ -6,7 +6,7 @@ import {
   Validators
 } from '@angular/forms';
 
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    RouterLink,
     CommonModule
   ],
   templateUrl: './booking-form.html',

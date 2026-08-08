@@ -1,0 +1,119 @@
+<div class="container py-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold">Travel Community</h2>
+      <p class="text-muted">
+        Share your journey, tips and travel experiences.
+      </p>
+    </div>
+
+    <a
+      routerLink="/community/create"
+      class="btn btn-primary"
+    >
+      Create Post
+    </a>
+  </div>
+
+  @if (loading) {
+    <div class="text-center py-5">
+      <div class="spinner-border"></div>
+      <p class="mt-2">Loading community...</p>
+    </div>
+  }
+
+  @if (!loading && posts.length === 0) {
+    <div class="text-center py-5">
+      <h5>No posts yet</h5>
+      <p class="text-muted">
+        Be the first traveler to share an experience.
+      </p>
+    </div>
+  }
+
+  <div class="row g-4">
+
+    @for (post of posts; track post._id) {
+
+      <div class="col-lg-8 mx-auto">
+
+        <div class="card border-0 shadow-sm">
+
+          <div class="card-body">
+
+            <div class="d-flex align-items-center mb-3">
+
+              @if (post.user?.picture) {
+                <img
+                  [src]="post.user?.picture"
+                  width="45"
+                  height="45"
+                  class="rounded-circle me-3"
+                  alt="User"
+                />
+              }
+
+              <div>
+                <h6 class="mb-0">
+                  {{ post.user?.name || 'Anonymous' }}
+                </h6>
+
+                <small class="text-muted">
+                  {{ post.createdAt | date }}
+                </small>
+              </div>
+
+            </div>
+
+            <h4>{{ post.title }}</h4>
+
+            <p class="text-muted">
+              {{ post.content }}
+            </p>
+
+            @if (post.imageUrl) {
+              <img
+                [src]="post.imageUrl"
+                class="img-fluid rounded mb-3"
+                alt="Travel post"
+                (error)="onImageError($event)"
+              />
+            }
+
+            <div class="d-flex gap-3">
+
+              <button
+                class="btn btn-sm btn-outline-danger"
+                (click)="likePost(post)"
+              >
+                ❤️ {{ post.likes.length }}
+              </button>
+
+              <a
+                [routerLink]="['/community/post', post._id]"
+                class="btn btn-sm btn-outline-primary"
+              >
+                💬 {{ post.commentsCount }}
+              </a>
+
+              <button
+                class="btn btn-sm btn-outline-secondary"
+                (click)="sharePost(post)"
+              >
+                Share
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm py-2">
 
   <div class="container">
 
@@ -10,36 +10,49 @@
 
     </a>
 
-    <div class="navbar-nav ms-auto">
+    <div class="navbar-nav ms-auto d-flex align-items-center gap-2">
 
       <a
-        class="nav-link text-white"
-        routerLink="/">
+        class="nav-link text-white px-3"
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
 
         Home
+
+      </a>
+
+      <a
+        class="nav-link text-white px-3"
+        routerLink="/community"
+        routerLinkActive="active">
+
+        Community
 
       </a>
 
       @if(isLoggedIn()) {
 
         <a
-          class="nav-link text-white"
-          routerLink="/booking-history">
+          class="nav-link text-white px-3"
+          routerLink="/booking-history"
+          routerLinkActive="active">
 
           My Bookings
 
         </a>
 
         <a
-          class="nav-link text-white"
-          routerLink="/profile">
+          class="nav-link text-white px-3"
+          routerLink="/profile"
+          routerLinkActive="active">
 
           Profile
 
         </a>
 
         <button
-          class="btn btn-outline-light ms-2"
+          class="btn btn-outline-light ms-2 px-3"
           (click)="logout()">
 
           Logout
@@ -51,7 +64,15 @@
       @else {
 
         <button
-          class="btn btn-light ms-2"
+          class="btn btn-outline-light ms-2 px-3"
+          (click)="loginDemo()">
+
+          Demo Login
+
+        </button>
+
+        <button
+          class="btn btn-light ms-2 px-3"
           (click)="login()">
 
           Login with Google
